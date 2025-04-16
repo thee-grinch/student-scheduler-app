@@ -1,0 +1,39 @@
+<template>
+  <aside class="w-64 bg-white min-h-screen shadow">
+    <div class="p-6 text-purple-700 font-bold text-2xl">Academic</div>
+    <nav class="flex flex-col gap-2 px-4">
+      <router-link
+        v-for="item in menuItems"
+        :key="item.label"
+        :to="item.route"
+        class="flex items-center gap-3 px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100"
+        :class="{ 'bg-purple-700 text-white font-bold': active === item.label }"
+        @click="() => setActive(item.label)"
+      >
+        <span class="material-icons">{{ item.icon }}</span>
+        <span>{{ item.label }}</span>
+      </router-link>
+    </nav>
+  </aside>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const active = ref("Dashboard");
+
+const menuItems = [
+  { label: 'Dashboard', icon: 'dashboard', route: '/dashboard' },
+  { label: 'Events', icon: 'event', route: '/dashboard/events' },
+  { label: 'Assignments', icon: 'assignment', route: '/dashboard/assignments' },
+  { label: 'Courses', icon: 'school', route: '/dashboard/courses' },
+  { label: 'Schedule', icon: 'calendar_today', route: '/dashboard/schedule' },
+  { label: 'Notes', icon: 'note', route: '/dashboard/notes' },
+  // { label: 'AI Chat', icon: 'chat', route: '/dashboard/ai-chat' },
+  { label: 'Settings', icon: 'settings', route: '/dashboard/settings' }
+];
+
+function setActive(label) {
+  active.value = label;
+}
+</script>
